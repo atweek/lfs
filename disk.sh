@@ -5,15 +5,15 @@ echo $LFS
 
 parted --script /dev/sdb \
 mklabel gpt \
-mkpart primary ext4 0 500MB
-mkpart primary ext4 500MB 30G
-mkpart primary ext4 30G -0M
-name 1 boot                                                      
-name 2 root                                                      
-name 3 home                                                      
-set 1 boot on
-print
-quit
+mkpart primary ext4 0 500MB \
+mkpart primary ext4 500MB 30G \
+mkpart primary ext4 30G -0M \
+name 1 boot \                                                
+name 2 root \                                                      
+name 3 home \                                                      
+set 1 boot on \
+print \
+quit \
 
 # mkfs.ext4 /dev/sdb1
 # mkfs.ext4 /dev/sdb2
