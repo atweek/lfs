@@ -1,10 +1,15 @@
+#!/bin/bash
+
+export LFS=/mnt/lfs
+echo $LFS
+
+echo "BUILD binutils-2.39"
 cd /mnt/lfs/sources/
 tar -xf binutils-2.39.tar.xz
 cd binutils-2.39
 
 mkdir -v build
 cd       build
-
 
 ../configure --prefix=$LFS/tools \
              --with-sysroot=$LFS \
@@ -16,6 +21,7 @@ cd       build
 make
 make install
 
+echo "BUILD gcc-12.2.0"
 cd /mnt/lfs/sources/
 tar -xf gcc-12.2.0.tar.xz
 cd gcc-12.2.0
@@ -36,8 +42,6 @@ esac
 
 mkdir -v build
 cd       build
-
-
 
 ../configure                  \
     --target=$LFS_TGT         \
@@ -66,6 +70,7 @@ cd ..
 cat gcc/limitx.h gcc/glimits.h gcc/limity.h > \
   `dirname $($LFS_TGT-gcc -print-libgcc-file-name)`/install-tools/include/limits.h
 
+
 cd /mnt/lfs/sources/
 tar -xf linux-5.19.2.tar.xz
 cd linux-5.19.2
@@ -77,6 +82,7 @@ find usr/include -type f ! -name '*.h' -delete
 cp -rv usr/include $LFS/usr
 
 
+echo "BUILD glibc-2.36"
 cd /mnt/lfs/sources/
 tar -xf glibc-2.36.tar.xz
 cd glibc-2.36
@@ -108,12 +114,15 @@ make
 make DESTDIR=$LFS install
 sed '/RTLDLIST=/s@/usr@@g' -i $LFS/usr/bin/ldd
 
+echo "------------check--------------"
 echo 'int main(){}' | gcc -xc -
 readelf -l a.out | grep ld-linux
 rm -v a.out
+echo "-------------------------------"
 $LFS/tools/libexec/gcc/$LFS_TGT/12.2.0/install-tools/mkheaders
 
 
+echo "BUILD libstdc++"
 cd /mnt/lfs/sources/gcc-12.2.0
 
 mkdir -v build

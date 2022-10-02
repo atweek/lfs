@@ -1,3 +1,8 @@
+#!/bin/bash
+
+export LFS=/mnt/lfs
+echo $LFS
+
 mkdir -pv $LFS/{etc,var} $LFS/usr/{bin,lib,sbin}
 
 for i in bin lib sbin; do
@@ -37,6 +42,6 @@ CONFIG_SITE=$LFS/usr/share/config.site
 export LFS LC_ALL LFS_TGT PATH CONFIG_SITE
 EOF
 
-export MAKEFLAGS='-j5'
+echo "export MAKEFLAGS='-j5'" >>  ~/.bashrc 
 
 source ~/.bash_profile
