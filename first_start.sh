@@ -6,3 +6,5 @@ sudo apt-get -y install binutils bison coreutils diffutils  findutils gawk gcc g
 sudo ln -sf bash /bin/sh
 
 export LFS=/mnt/lfs
+
+port forward?
