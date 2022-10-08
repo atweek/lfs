@@ -7,4 +7,4 @@ sudo ln -sf bash /bin/sh
 
 export LFS=/mnt/lfs
 
-port forward?
+echo "port forward?"
