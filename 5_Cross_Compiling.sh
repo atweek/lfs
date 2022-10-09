@@ -211,7 +211,6 @@ echo "binutils-2.39"
 cd /mnt/lfs/sources/
 cd binutils-2.39
 sed '6009s/$add_dir//' -i ltmain.sh
-rm -rf build
 mkdir -v build
 cd       build
 ../configure                   \
@@ -246,7 +245,6 @@ esac
 
 sed '/thread_header =/s/@.*@/gthr-posix.h/' \
     -i libgcc/Makefile.in libstdc++-v3/include/Makefile.in
-rm -rf build
 mkdir -v build
 cd       build
 ../configure                                       \

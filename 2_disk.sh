@@ -30,5 +30,5 @@ lsblk
 
 mkdir -v $LFS/sources
 chmod -v a+wt $LFS/sources
-wget https://www.linuxfromscratch.org/lfs/view/stable/wget-list > wget.out
-wget --input-file=wget-list --continue --directory-prefix=$LFS/sources >> wget.out
+wget https://www.linuxfromscratch.org/lfs/view/stable/wget-list
+wget --input-file=wget-list --continue --directory-prefix=$LFS/sources
